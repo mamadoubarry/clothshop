@@ -1,0 +1,59 @@
+<h1>My Listing items</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Color</th>
+    <th>Size</th>
+    <th>Quantity</th>
+    <th>Image url</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @items.each do |item| %>
+      <tr>
+        <div class="title">
+          <td>
+            <%= link_to item.title, item %>
+          </td>
+        </div>
+        <div class="description">
+          <td>
+            <%= h item.description %>
+          </td>
+        </div>
+        <div class="price">
+          <td>
+            <%= number_to_currency(item.price, :unit => "&pound;") %>
+          </td>
+        </div>
+        <td><%= item.color %></td>
+        <td><%= item.size %></td>
+        <td><%= item.quantity %></td>
+        <div class="image">
+          <td>
+            <%= link_to (image_tag item.image_url, :style => "height:100px"), item %>
+          </td>
+        </div>
+        <div class="links">
+          <% if session[:login] == 1 %>
+              <td><%= link_to 'Show', item %></td>
+              <td><%= link_to 'Edit', edit_item_path(item) %></td>
+              <td>
+                <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+              </td>
+          <% else %>
+              <td><a href="/bag/<%= item.id %>">Add to Bag</a><br><br></td>
+          <% end %>
+
+        </div>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
+    <p><%= link_to 'New Item', new_item_path %></p>
