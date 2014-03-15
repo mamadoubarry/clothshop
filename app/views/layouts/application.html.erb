@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ClothShop</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+</head>
+<body>
+
+<div id='header'>
+  <!-- Header Image Displayes here -->
+</div>
+<div id='menu'>
+  <!-- Header Image Displayes here -->
+  <div id="navbar">
+ 
+    <li><a href="/home">Home</a></li>
+    <li><a href="/dresses">Dresses</a></li>
+    <li><a href="/contact">Contact_US</a></li>
+    <% if user_signed_in? %>
+        <li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
+    <% else %>
+        <li><%= link_to('Sign In', new_user_session_path)  %></li>
+        <li><%= link_to('Register', new_user_registration_path)  %></li>
+    <% end %>
+
+    <li><a href="/bag">Shopping Bag</a></li>
+
+  </div>
+  <div id='container'>
+    <div id="content">
+      <p class="notice"><%= notice %></p>
+
+      <p class="alert"><%= alert %></p>
+
+
+      <%= yield %>
+
+
+      <% if user_signed_in? %>
+          <div>Signed in as... <%= current_user.email %>
+            (<%= link_to 'Sign out', destroy_user_session_path, :method => :delete
+          %>)
+          </div>
+      <% else %>
+          <%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
+      <% end %>
+
+    </div>
+
+    <div id='first-column'>
+      <div class="search_box">
+                <%= render :partial => 'items/search' %>
+        </div>
+      <div class="box">
+        <h2 class="BoxHeaders">Special Dresses</h2>
+        <a href="http://127.0.0.1:3000/bag"><img src="/assets/Clothes/Pict1.jpg" alt="Special Offers"></a>
+      </div>
+      <div class="box">
+        <h2 class="BoxHeaders">New Dress Publish</h2>
+        <a href="http://127.0.0.1:3000/bag"><img src="/assets/Clothes/Pict2.jpg" alt="New Clothes"></a>
+      </div>
+      <div class="box">
+        <h2 class="BoxHeaders">Lovely Dress</h2>
+        <a href="http://127.0.0.1:3000/bag"><img src="/assets/Clothes/Pict3.jpg" alt="New Clothes"></a>
+      </div>
+      <div class="box">
+        <h2 class="BoxHeaders">Look Dress</h2>
+        <a href="http://127.0.0.1:3000/bag"><img src="/assets/Clothes/Pict4.jpg" alt="New Clothes"></a>
+      </div>
+      <div class="box">
+        <h2 class="BoxHeaders">Pure Cotton Dress</h2>
+        <a href="http://127.0.0.1:3000/bag"><img src="/assets/Clothes/Pict5.jpg" alt="New Clothes"></a>
+      </div>
+
+    </div>  <br>
+    <div id='footer'>
+      <p><h6 class="footertext">&copy; 2014 clothshop.com Copyright, All Rights Reserved.</h6> </p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
